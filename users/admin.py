@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomerUser
+from .models import User
 
-class CustomerUserAdmin(UserAdmin):
-    model = CustomerUser
+class UsersAdmin(UserAdmin):
+    model = User
     list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff']
 
-admin.site.register(CustomerUser, CustomerUserAdmin)
+admin.site.register(User, UsersAdmin)

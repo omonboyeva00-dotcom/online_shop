@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.conf import settings
 
 from .utils import generate_code
-from . models import CustomerUser,EmailCode
+from . models import User,EmailCode
 from django.utils import timezone
 
 
@@ -24,7 +24,7 @@ class RegisterView(View):
         password = request.POST['password']
         confirm_password= request.POST['confirm_password']
 
-        if CustomerUser.objects.filter(username=username).exists():
+        if User.objects.filter(username=username).exists():
             return render(request,'auth/register.html',{
                 "error":"bu username band"
             })
@@ -34,7 +34,7 @@ class RegisterView(View):
                 "error":"parollar mos emas"
             })
 
-        user= CustomerUser.objects.create_user(
+        user= User.objects.create_user(
             username=username,
             email=email,
             password=password,
@@ -68,7 +68,7 @@ class Verify_EmailView(View):
         if not user_id:
             return redirect('register')
 
-        user = CustomerUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
 
         otp = EmailCode.objects.filter(
             user=user,
@@ -109,7 +109,7 @@ class SetNewPasswordView(View):
                 "error": "Parollar mos emas"
             })
 
-        user = CustomerUser.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         user.set_password(password)
         user.is_active = True
         user.save()
