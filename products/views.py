@@ -12,3 +12,5 @@ class HomeView(View):
             'categories':categories,
             'products': products,
         })
+
+
