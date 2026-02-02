@@ -22,7 +22,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if self.percent:
              self.discount_price=self.price-((self.price/100)*self.percent)
-             super(Product,self).save(*args,**kwargs)
+        super(Product,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.title

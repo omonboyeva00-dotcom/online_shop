@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load static  %}
 <html lang="en">
@@ -41,19 +40,7 @@
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-					</ul>
-				</div>
-			</div>
+
 			<!-- /TOP HEADER -->
 
 			<!-- MAIN HEADER -->
@@ -112,7 +99,7 @@
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="{% static './img/product01.png' %}" alt="">
+													<img src="{% static './img/product01.png' %}" alt="" style="height: 150px">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
@@ -172,13 +159,11 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<li class="active"><a href="#">Bosh sahifa</a></li>
+						<li><a href="{% url 'products' %}">Mahsulotlar</a></li>
+						<li><a href="#">Profil</a></li>
+						<li><a href="#">Kirish</a></li>
+						<li><a href="#">Royxatdan otish</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -199,7 +184,7 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="{{ category.image.url }}" alt="">
+								<img src="{{ category.image.url }}" alt="" style="height: 350px">
 							</div>
 							<div class="shop-body">
 								<h3>{{ category.title }}</h3>
@@ -228,11 +213,10 @@
 						<div class="section-title">
 							<h3 class="title">New Products</h3>
 							<div class="section-nav">
+                                {% for c in categories %}
 								<ul class="section-tab-nav tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-									<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-									<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+									<li class="active"><a data-toggle="tab" href="#tab1">{{c.title}}</a></li>
+									{% endfor %}
 								</ul>
 							</div>
 						</div>

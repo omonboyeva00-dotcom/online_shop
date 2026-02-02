@@ -1,6 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomerUser
 
-# Register your models her
+class CustomerUserAdmin(UserAdmin):
+    model = CustomerUser
+    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff']
 
-from .models import CustomerUser,EmailCode
-admin.site.register([CustomerUser,EmailCode])
+admin.site.register(CustomerUser, CustomerUserAdmin)
