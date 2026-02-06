@@ -1,87 +1,122 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Sign Up</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #74ebd5, #9face6);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
+
         .card {
             background: #fff;
-            width: 350px;
-            padding: 25px;
+            width: 380px;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
-        h2 {
+
+        .card h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: #333;
         }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
         input {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 10px 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
             border-radius: 6px;
-            border: 1px solid #ccc;
+            font-size: 14px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #4a6cf7;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
         }
-        button:hover {
-            background: #3a57d6;
-        }
+
         .error {
-            background: #ffe0e0;
-            color: #b00000;
-            padding: 8px;
-            border-radius: 6px;
+            color: #e74c3c;
+            font-size: 14px;
             margin-bottom: 10px;
             text-align: center;
         }
-        .link {
-            text-align: center;
-            margin-top: 12px;
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        a {
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .footer-text a {
+            color: #667eea;
             text-decoration: none;
-            color: #4a6cf7;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>Register</h2>
-
-    {% if error %}
-        <div class="error">{{ error }}</div>
-    {% endif %}
+    <h2>Create Account</h2>
 
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirm_password" placeholder="Confirm password" required>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
 
         <button type="submit">Sign Up</button>
     </form>
 
-    <div class="link">
-        <p>Akkauntingiz bormi? <a href="{% url 'login' %}">Login</a></p>
+    <div class="footer-text">
+        Already have an account?
+        <a href="#">Login</a>
     </div>
 </div>
 

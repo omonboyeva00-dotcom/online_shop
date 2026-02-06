@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
-{% load static  %}
+{% load static %}
 <html>
 <head>
-<title>Online_shop</title>
+<title>Online do'kon</title>
 <link href="{% static 'new/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <!--jQuery(necessary for Bootstrap's JavaScript plugins)-->
 <script src="{% static 'new/js/jquery-1.11.0.min.js' %}"></script>
@@ -33,53 +34,11 @@
 			<div class="header">
 				<div class="col-md-9 header-left">
 				<div class="top-nav">
-					<ul class="memenu skyblue"><li class="active"><a href="{% url 'home'%}">Bosh sahifa</a></li>
+					<ul class="memenu skyblue"><li class="active"><a href="{% url 'home' %}">Bosh sahifa</a></li>
 						<li class="grid"><a href="{% url 'products' %}">Mahsulotlar</a>
-							<div class="mepanel">
-								<div class="row">
-									<div class="col1 me-one">
-										<h4>Shop</h4>
-										<ul>
-											<li><a href="products.html">New Arrivals</a></li>
-											<li><a href="products.html">Blazers</a></li>
-											<li><a href="products.html">Swem Wear</a></li>
-											<li><a href="products.html">Accessories</a></li>
-											<li><a href="products.html">Handbags</a></li>
-											<li><a href="products.html">T-Shirts</a></li>
-											<li><a href="products.html">Watches</a></li>
-											<li><a href="products.html">My Shopping Bag</a></li>
-										</ul>
-									</div>
-									<div class="col1 me-one">
-										<h4>Style Zone</h4>
-										<ul>
-											<li><a href="products.html">Shoes</a></li>
-											<li><a href="products.html">Watches</a></li>
-											<li><a href="products.html">Brands</a></li>
-											<li><a href="products.html">Coats</a></li>
-											<li><a href="products.html">Accessories</a></li>
-											<li><a href="products.html">Trousers</a></li>
-										</ul>
-									</div>
-									<div class="col1 me-one">
-										<h4>Popular Brands</h4>
-										<ul>
-											<li><a href="products.html">499 Store</a></li>
-											<li><a href="products.html">Fastrack</a></li>
-											<li><a href="products.html">Casio</a></li>
-											<li><a href="products.html">Fossil</a></li>
-											<li><a href="products.html">Maxima</a></li>
-											<li><a href="products.html">Timex</a></li>
-											<li><a href="products.html">TomTom</a></li>
-											<li><a href="products.html">Titan</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
 						</li>
-						<li class="grid"><a href="#">Profil</a>
+						<li class="grid"><a href="#">Profile</a>
 						</li>
-
 						<li class="grid"><a href="contact.html">Kirish</a>
 						</li>
 					</ul>
@@ -118,14 +77,14 @@
 					<div class="col-md-5 single-top-left">	
 						<div class="flexslider">
 							  <ul class="slides">
-                                  <li data-thumb="{{product.main_image.url}}">
+								  <li data-thumb="{{product.main_image.url}}">
 									<div class="thumb-image"> <img src="{{product.main_image.url}}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
 								</li>
-                                  {% for image in images %}
+								  {% for image in images %}
 								<li data-thumb="{{image.image.url}}">
 									<div class="thumb-image"> <img src="{{image.image.url}}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
 								</li>
-                                  {% endfor %}
+								{% endfor %}
 							  </ul>
 						</div>
 						<!-- FlexSlider -->
@@ -162,13 +121,20 @@
 							</div>
 							
 							<h5 class="item_price">$ {{product.price}}</h5>
-							<p>{{product.desc}}</p>
+							<p> {{product.desc}}</p>
 							<div class="available">
+								<form method="post" action="{% url 'add_to_cart' product.id %}">
+									{% csrf_token %}
 
-						</div>
-								<a href="#" class="add-cart item_add">ADD TO CART</a>
-							
-						</div>
+									<input name="quantity" type="number" id="quantity" value="1" min="1">
+
+									<div>
+										<button type="submit" class="add-cart item_add">
+											ADD TO CART
+										</button>
+									</div>
+								</form>
+
 					</div>
 					<div class="clearfix"> </div>
 				</div>
@@ -179,45 +145,21 @@
 				</div>
 				<div class="latestproducts">
 					<div class="product-one">
+						{% for product in related_products %}
 						<div class="col-md-4 product-left p-left"> 
 							<div class="product-main simpleCart_shelfItem">
-								<a href="product_detail.html" class="mask"><img class="img-responsive zoom-img" src="{{product.main_image.url}}" alt="" /></a>
+								<a href="" class="mask"><img class="img-responsive zoom-img" src="{{product.main_image.url}}" alt="" /></a>
 								<div class="product-bottom">
-									<h3>Smart Watches</h3>
+									<h3>{{product.title}}</h3>
 									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span class=" item_price">$ 329</span></h4>
+									<h4><a class="item_add" href="#"><i></i></a> <span class=" item_price">$ {{product.price}}</span></h4>
 								</div>
 								<div class="srch">
-									<span>-50%</span>
+									<span>-{{product.precent}}%</span>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 product-left p-left"> 
-							<div class="product-main simpleCart_shelfItem">
-								<a href="product_detail.html" class="mask"><img class="img-responsive zoom-img" src="images/p-2.png" alt="" /></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-left p-left"> 
-							<div class="product-main simpleCart_shelfItem">
-								<a href="product_detail.html" class="mask"><img class="img-responsive zoom-img" src="images/p-3.png" alt="" /></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 						<div class="clearfix"></div>
 					</div>
 				</div>
@@ -367,5 +309,5 @@
 		</div>
 	</div>
 	<!--footer-end-->	
-</body>
+ </body>
 </html>
